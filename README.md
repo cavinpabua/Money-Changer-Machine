@@ -12,7 +12,7 @@ This is a thesis project request.
 
 # PROJECT DIAGRAM
 
-![DIAGRAM](diagram.png)
+![DIAGRAM](diagram.jpg)
 
 ## PINS ASSIGNMENTS
 
