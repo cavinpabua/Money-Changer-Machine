@@ -55,6 +55,9 @@ window = uic.loadUi("main.ui")
 
 # Define button click handlers
 def to_bills_clicked():
+     # check if coin count is greater than 0
+    if coin_count == 0:
+        return
     bills_window = uic.loadUi("to_bills.ui")
     def to_100_bills_clicked():
         global coin_count
@@ -96,6 +99,9 @@ def to_bills_clicked():
 
 
 def to_coins_clicked():
+     # check if coin count is greater than 0
+    if coin_count == 0:
+        return
     coins_window = uic.loadUi("to_coins.ui")
     def to_5_coins_clicked():
         global coin_count
