@@ -22,6 +22,12 @@ coin_pin = 4
 ```
 
 ```
+Bill Acceptor
+bill_credit = 5
+bill_inhibitor = 6
+```
+
+```
 Relays 1 to 3 is for bills 100, 50 and 20. While relays 4 and 5 is for coins 5 and 1.
 relay_1_pin = 17
 relay_2_pin = 18

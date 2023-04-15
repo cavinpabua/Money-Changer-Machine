@@ -8,6 +8,8 @@ GPIO.setmode(GPIO.BCM)
 
 # Define pins
 coin_pin = 4 
+bill_acceptor_pin = 5
+bill_inhibitor_pin = 6
 relay_1_pin = 17
 relay_2_pin = 18
 relay_3_pin = 27
@@ -20,6 +22,8 @@ ir_sensor_4_pin = 7
 ir_sensor_5_pin = 12
 
 GPIO.setup(coin_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(bill_acceptor_pin, GPIO.IN)
+GPIO.setup(bill_inhibitor_pin, GPIO.IN)
 GPIO.setup(relay_1_pin, GPIO.OUT)
 GPIO.setup(relay_2_pin, GPIO.OUT)
 GPIO.setup(relay_3_pin, GPIO.OUT)
@@ -39,6 +43,34 @@ prev_input_5 = GPIO.input(ir_sensor_5_pin)
 
 coin_count = 0
 last_time = 0
+DELAY_TIME = 0.5
+credit_flag = False
+credit_timer = 0
+
+# Interrupt callback for credit signal
+def credit_callback(channel):
+    global credit_flag
+    global credit_timer
+
+    # Set credit flag and timer
+    credit_flag = True
+    credit_timer = time.time()
+
+# Interrupt callback for Inhibitor+ signal
+def inhibitor_callback(channel):
+    global credit_flag
+    global credit_timer
+    global coin_count
+
+    # Check if credit flag is set and delay time has passed
+    if credit_flag and (time.time() - credit_timer) >= DELAY_TIME:
+        # Add credit and reset credit flag
+        coin_count += 1
+        credit_flag = False
+
+
+
+
 def pulse_detected(channel):
     global coin_count
     curr_time = time.time()
@@ -49,6 +81,10 @@ def pulse_detected(channel):
     lcd_coin_counter.display(coin_count)
 
 GPIO.add_event_detect(coin_pin, GPIO.FALLING, callback=pulse_detected)
+GPIO.add_event_detect(bill_acceptor_pin, GPIO.RISING, callback=credit_callback)
+# Set up interrupt detection for Inhibitor+ signal
+GPIO.add_event_detect(bill_inhibitor_pin, GPIO.RISING, callback=inhibitor_callback)
+
 
 app = QtWidgets.QApplication([])
 window = uic.loadUi("main.ui")
