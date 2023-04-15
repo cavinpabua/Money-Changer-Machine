@@ -5,7 +5,8 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(4, GPIO.IN)
 
 def coin_callback(channel):
-    print("Coin detected!")
+    if GPIO.input(channel) == 0:
+        print("Coin detected!")
 
 GPIO.add_event_detect(4, GPIO.BOTH, callback=coin_callback)
 
