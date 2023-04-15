@@ -87,7 +87,7 @@ def inhibitor_callback(channel):
         coin_count += 1
         credit_flag = False
 
-x   
+
 def pulse_detected(channel):
     global coin_count
     global last_time
