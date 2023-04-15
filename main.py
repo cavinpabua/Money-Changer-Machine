@@ -3,6 +3,8 @@ import time
 from PyQt5 import QtWidgets, uic
 import sys
 import time
+import os
+os.environ["DISPLAY"] = ":0"
 
 GPIO.setmode(GPIO.BCM)
 
