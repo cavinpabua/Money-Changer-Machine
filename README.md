@@ -25,6 +25,8 @@ coin_pin = 4
 Bill Acceptor
 bill_credit = 5
 bill_inhibitor = 6
+RED - 12V
+ORANGE - GND
 ```
 
 ```
