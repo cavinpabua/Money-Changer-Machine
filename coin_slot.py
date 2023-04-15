@@ -19,7 +19,7 @@ def count_pulses(channel):
     print(pulse_count)
 
 # Add interrupt to GPIO pin
-GPIO.add_event_detect(coin_pin, GPIO.FALLING, callback=count_pulses)
+GPIO.add_event_detect(coin_pin, GPIO.RISING, callback=count_pulses)
 
 # Main loop
 while True:
@@ -34,4 +34,4 @@ while True:
         print("Dispensing %d coins..." % num_coins)
         
         # Reset GPIO pin for pulse detection
-        GPIO.add_event_detect(coin_pin, GPIO.FALLING, callback=count_pulses)
+        GPIO.add_event_detect(coin_pin, GPIO.RISING, callback=count_pulses)
