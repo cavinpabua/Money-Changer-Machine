@@ -41,6 +41,13 @@ prev_input_3 = GPIO.input(ir_sensor_3_pin)
 prev_input_4 = GPIO.input(ir_sensor_4_pin)  
 prev_input_5 = GPIO.input(ir_sensor_5_pin)
 
+GPIO.output(relay_1_pin, GPIO.LOW)
+GPIO.output(relay_2_pin, GPIO.LOW)
+GPIO.output(relay_3_pin, GPIO.LOW)
+GPIO.output(relay_4_pin, GPIO.LOW)
+GPIO.output(relay_5_pin, GPIO.LOW)
+
+
 coin_count = 0
 last_time = 0
 DELAY_TIME = 0.5
@@ -73,6 +80,7 @@ def inhibitor_callback(channel):
 
 def pulse_detected(channel):
     global coin_count
+    global last_time
     curr_time = time.time()
     if curr_time - last_time > 0.05:  # Ignore pulses less than 50ms apart
         coin_count += 1
