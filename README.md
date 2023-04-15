@@ -29,6 +29,12 @@ RED - 12V
 ORANGE - GND
 ```
 
+# OPTOCOUPLER DIAGRAM
+
+![OPTO1](opto1.jpg)
+
+![OPTO2](opto2.jpg)
+
 ```
 Relays 1 to 3 is for bills 100, 50 and 20. While relays 4 and 5 is for coins 5 and 1.
 relay_1_pin = 17
