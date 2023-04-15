@@ -54,6 +54,16 @@ DELAY_TIME = 0.5
 credit_flag = False
 credit_timer = 0
 
+
+
+app = QtWidgets.QApplication([])
+window = uic.loadUi("main.ui")
+
+
+
+# Get reference to LCD number widget
+lcd_coin_counter = window.lcd_coin_counter
+
 # Interrupt callback for credit signal
 def credit_callback(channel):
     global credit_flag
@@ -75,12 +85,11 @@ def inhibitor_callback(channel):
         coin_count += 1
         credit_flag = False
 
-
-
-
+x   
 def pulse_detected(channel):
     global coin_count
     global last_time
+    global lcd_coin_counter
     curr_time = time.time()
     if curr_time - last_time > 0.05:  # Ignore pulses less than 50ms apart
         coin_count += 1
@@ -88,14 +97,15 @@ def pulse_detected(channel):
 
     lcd_coin_counter.display(coin_count)
 
+
+
+
+
 GPIO.add_event_detect(coin_pin, GPIO.FALLING, callback=pulse_detected)
 GPIO.add_event_detect(bill_acceptor_pin, GPIO.RISING, callback=credit_callback)
 # Set up interrupt detection for Inhibitor+ signal
 GPIO.add_event_detect(bill_inhibitor_pin, GPIO.RISING, callback=inhibitor_callback)
 
-
-app = QtWidgets.QApplication([])
-window = uic.loadUi("main.ui")
 
 # Define button click handlers
 def to_bills_clicked():
@@ -105,6 +115,7 @@ def to_bills_clicked():
     bills_window = uic.loadUi("to_bills.ui")
     def to_100_bills_clicked():
         global coin_count
+        global lcd_coin_counter
         bills_to_dispense = [100, 50, 20]
         remaining_coins = dispense(coin_count, bills_to_dispense)
         coin_count = remaining_coins
@@ -116,6 +127,7 @@ def to_bills_clicked():
             lcd_coin_counter.display(coin_count)
     def to_50_bills_clicked():
         global coin_count
+        global lcd_coin_counter
         bills_to_dispense = [50, 20]
         remaining_coins = dispense(coin_count, bills_to_dispense)
         coin_count = remaining_coins
@@ -127,6 +139,7 @@ def to_bills_clicked():
             lcd_coin_counter.display(coin_count)
     def to_20_bills_clicked():
         global coin_count
+        global lcd_coin_counter
         bills_to_dispense = [20]
         remaining_coins = dispense(coin_count, bills_to_dispense)
         coin_count = remaining_coins
@@ -149,6 +162,7 @@ def to_coins_clicked():
     coins_window = uic.loadUi("to_coins.ui")
     def to_5_coins_clicked():
         global coin_count
+        global lcd_coin_counter
         remaining_coins = dispense(coin_count, [5, 1])
         coin_count = 0
         lcd_coin_counter.display(coin_count)
@@ -157,6 +171,7 @@ def to_coins_clicked():
 
     def to_1_coins_clicked():
         global coin_count
+        global lcd_coin_counter
         dispense(coin_count, [1])
         coin_count = 0
         lcd_coin_counter.display(coin_count)
@@ -246,12 +261,12 @@ def operate_dispenser(count, denomination):
     return count
 
 
+
 # Connect button click handlers
 window.to_bills.clicked.connect(to_bills_clicked)
 window.to_coins.clicked.connect(to_coins_clicked)
 
-# Get reference to LCD number widget
-lcd_coin_counter = window.lcd_coin_counter
 
 window.show()
 app.exec()
+
