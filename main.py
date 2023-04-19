@@ -201,6 +201,7 @@ def dispense(coins, denominations):
 
 
 def operate_dispenser(count, denomination):
+    global prev_input_1, prev_input_2, prev_input_3, prev_input_4, prev_input_5
     dispenser_count = 0
     
     if denomination == 100:
