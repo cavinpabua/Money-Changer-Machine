@@ -26,7 +26,7 @@ try:
     GPIO.setup(coin_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     GPIO.setup(bill_acceptor_pin, GPIO.IN)
     GPIO.setup(bill_inhibitor_pin, GPIO.IN)
-    
+
     GPIO.setup(relay_1_pin, GPIO.OUT)
     GPIO.setup(relay_2_pin, GPIO.OUT)
     GPIO.setup(relay_3_pin, GPIO.OUT)
@@ -179,13 +179,11 @@ def to_bills_clicked():
 
 
 def to_coins_clicked():
-    global window, coins_window
+    global window, coins_window,bills_window,  coin_count,lcd_coin_counter
      # check if coin count is greater than 0
     if coin_count == 0:
         return
     def to_5_coins_clicked():
-        global coin_count
-        global lcd_coin_counter, bills_window, coins_window, window
         remaining_coins = dispense(coin_count, [5, 1])
         coin_count = 0
         lcd_coin_counter.display(coin_count)
@@ -199,8 +197,6 @@ def to_coins_clicked():
             window.show()
 
     def to_1_coins_clicked():
-        global coin_count
-        global lcd_coin_counter, bills_window, coins_window, window
         dispense(coin_count, [1])
         coin_count = 0
         lcd_coin_counter.display(coin_count)
@@ -217,6 +213,8 @@ def to_coins_clicked():
 
 def dispense(coins, denominations):
     global window, coins_window, bills_window
+    if coins == 0:
+        return coins
     for denomination in denominations:
         print("Number of {} bills: {}".format(denomination, coins // denomination))
         count = coins // denomination
@@ -225,11 +223,10 @@ def dispense(coins, denominations):
         if count <= 0:
             continue
         rem = operate_dispenser(count, denomination)
+        coins = coins % denomination
         if rem <= 0:
             break
-        coins = coins % denomination
         time.sleep(2)
-    # show main.ui
     
     return coins
 
