@@ -290,6 +290,7 @@ def operate_dispenser(count, denomination):
                 # if GPIO.input(ir_sensor_4_pin):
                 if input_state_4 == GPIO.LOW:
                     dispenser_count += 1
+                    print("dispenser count: {}".format(dispenser_count))
                 prev_input_4 = input_state_4
                 time.sleep(0.5)
         # turn off relay 4
