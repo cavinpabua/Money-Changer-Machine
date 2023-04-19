@@ -133,6 +133,12 @@ def to_bills_clicked():
             dispense(remaining_coins, remaining_coins_to_dispense)
             coin_count = 0
             lcd_coin_counter.display(coin_count)
+        try:
+            bills_window.hide()
+            coins_window.hide()
+            window.show()
+        except:
+            window.show()
     def to_50_bills_clicked():
         global coin_count
         global lcd_coin_counter
@@ -145,6 +151,12 @@ def to_bills_clicked():
             dispense(remaining_coins, remaining_coins_to_dispense)
             coin_count = 0
             lcd_coin_counter.display(coin_count)
+        try:
+            bills_window.hide()
+            coins_window.hide()
+            window.show()
+        except:
+            window.show()
     def to_20_bills_clicked():
         global coin_count
         global lcd_coin_counter
@@ -157,6 +169,12 @@ def to_bills_clicked():
             dispense(remaining_coins, remaining_coins_to_dispense)
             coin_count = 0
             lcd_coin_counter.display(coin_count)
+        try:
+            bills_window.hide()
+            coins_window.hide()
+            window.show()
+        except:
+            window.show()
     bills_window.to_100_bills.clicked.connect(to_100_bills_clicked)
     bills_window.to_50_bills.clicked.connect(to_50_bills_clicked)
     bills_window.to_20_bills.clicked.connect(to_20_bills_clicked)
@@ -177,6 +195,12 @@ def to_coins_clicked():
         lcd_coin_counter.display(coin_count)
         if remaining_coins > 0:
             dispense(remaining_coins, [1])
+        try:
+            bills_window.hide()
+            coins_window.hide()
+            window.show()
+        except:
+            window.show()
 
     def to_1_coins_clicked():
         global coin_count
@@ -184,19 +208,26 @@ def to_coins_clicked():
         dispense(coin_count, [1])
         coin_count = 0
         lcd_coin_counter.display(coin_count)
+        try:
+            bills_window.hide()
+            coins_window.hide()
+            window.show()
+        except:
+            window.show()
     coins_window.to_5_coins.clicked.connect(to_5_coins_clicked)
     coins_window.to_1_coins.clicked.connect(to_1_coins_clicked)
     window.hide()
     coins_window.show()
 
 def dispense(coins, denominations):
+    global window, coins_window, bills_window
     for denomination in denominations:
         print("Number of {} bills: {}".format(denomination, coins // denomination))
         count = coins // denomination
         operate_dispenser(count, denomination)
         coins = coins % denomination
     # show main.ui
-    window.show()
+    
     return coins
 
 
