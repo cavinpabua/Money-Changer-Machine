@@ -6,7 +6,7 @@ GPIO.setup(4, GPIO.IN)
 
 def coin_callback(channel):
     if GPIO.input(channel) != 0:
-        print("Coin detected!")
+        print("Coin detected!", channel)
 
 GPIO.add_event_detect(4, GPIO.FALLING, callback=coin_callback)
 

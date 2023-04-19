@@ -9,7 +9,7 @@ os.environ["DISPLAY"] = ":0"
 GPIO.setmode(GPIO.BCM)
 
 # Define pins
-coin_pin = 4 
+coin_pin = 2
 bill_acceptor_pin = 5
 bill_inhibitor_pin = 6
 relay_1_pin = 17
@@ -154,6 +154,7 @@ def to_bills_clicked():
     bills_window.to_100_bills.clicked.connect(to_100_bills_clicked)
     bills_window.to_50_bills.clicked.connect(to_50_bills_clicked)
     bills_window.to_20_bills.clicked.connect(to_20_bills_clicked)
+    window.hide()
     bills_window.show()
 
 
@@ -179,6 +180,7 @@ def to_coins_clicked():
         lcd_coin_counter.display(coin_count)
     coins_window.to_5_coins.clicked.connect(to_5_coins_clicked)
     coins_window.to_1_coins.clicked.connect(to_1_coins_clicked)
+    window.hide()
     coins_window.show()
 
 def dispense(coins, denominations):
@@ -267,7 +269,6 @@ def operate_dispenser(count, denomination):
 # Connect button click handlers
 window.to_bills.clicked.connect(to_bills_clicked)
 window.to_coins.clicked.connect(to_coins_clicked)
-
 
 window.show()
 app.exec()
