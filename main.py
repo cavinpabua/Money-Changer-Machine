@@ -280,6 +280,8 @@ def operate_dispenser(count, denomination):
             GPIO.output(relay_3_pin, GPIO.LOW)
     elif denomination == 5:
         # turn on relay 4
+        while GPIO.input(ir_sensor_4_pin) == GPIO.HIGH:
+            time.sleep(0.01)
         print("Turning on relay 4")
         GPIO.output(relay_4_pin, GPIO.HIGH)
         print("turned ON!")
@@ -291,9 +293,12 @@ def operate_dispenser(count, denomination):
                     GPIO.output(relay_4_pin, GPIO.LOW)
                 while GPIO.input(ir_sensor_4_pin) == GPIO.HIGH:
                     time.sleep(0.01)
-        time.sleep(1)  
     elif denomination == 1:
         # turn on relay 5
+        # wait to turn LOW
+        while GPIO.input(ir_sensor_5_pin) == GPIO.HIGH:
+            time.sleep(0.01)
+
         print("Turning on relay 5")
         GPIO.output(relay_5_pin, GPIO.HIGH)
         print("TURNED ON!")
@@ -305,7 +310,6 @@ def operate_dispenser(count, denomination):
                     GPIO.output(relay_5_pin, GPIO.LOW)
                 while GPIO.input(ir_sensor_5_pin) == GPIO.HIGH:
                     time.sleep(0.01)
-        time.sleep(1)
     return count
 
 
