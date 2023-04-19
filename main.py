@@ -224,8 +224,9 @@ def dispense(coins, denominations):
     for denomination in denominations:
         print("Number of {} bills: {}".format(denomination, coins // denomination))
         count = coins // denomination
-        operate_dispenser(count, denomination)
+        rem = operate_dispenser(count, denomination)
         coins = coins % denomination
+        print("Rem: {}".format(rem), "Denomination: {}".format(denomination))
     # show main.ui
     
     return coins
