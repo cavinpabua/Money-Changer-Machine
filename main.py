@@ -226,6 +226,7 @@ def dispense(coins, denominations):
         count = coins // denomination
         rem = operate_dispenser(count, denomination)
         coins = coins % denomination
+        time.sleep(2)
         print("Rem: {}".format(rem), "Denomination: {}".format(denomination))
     # show main.ui
     
