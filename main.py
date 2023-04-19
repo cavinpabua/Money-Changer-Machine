@@ -295,7 +295,7 @@ def operate_dispenser(count, denomination):
                     print("dispenser count reached")
 
                 prev_input_4 = input_state_4
-                time.sleep(0.5)
+                time.sleep(0.1)
         # turn off relay 4
         GPIO.output(relay_4_pin, GPIO.LOW)
     elif denomination == 1:
