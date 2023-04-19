@@ -43,11 +43,6 @@ try:
     prev_input_4 = GPIO.input(ir_sensor_4_pin)  
     prev_input_5 = GPIO.input(ir_sensor_5_pin)
 
-    GPIO.output(relay_1_pin, GPIO.LOW)
-    GPIO.output(relay_2_pin, GPIO.LOW)
-    GPIO.output(relay_3_pin, GPIO.LOW)
-    GPIO.output(relay_4_pin, GPIO.LOW)
-    GPIO.output(relay_5_pin, GPIO.LOW)
 except:
     GPIO.cleanup()
     exit()
@@ -157,7 +152,7 @@ def to_bills_clicked():
     bills_window.to_100_bills.clicked.connect(to_100_bills_clicked)
     bills_window.to_50_bills.clicked.connect(to_50_bills_clicked)
     bills_window.to_20_bills.clicked.connect(to_20_bills_clicked)
-    window.hide()
+    # window.hide()
     bills_window.show()
 
 
@@ -183,7 +178,7 @@ def to_coins_clicked():
         lcd_coin_counter.display(coin_count)
     coins_window.to_5_coins.clicked.connect(to_5_coins_clicked)
     coins_window.to_1_coins.clicked.connect(to_1_coins_clicked)
-    window.hide()
+    # window.hide()
     coins_window.show()
 
 def dispense(coins, denominations):
