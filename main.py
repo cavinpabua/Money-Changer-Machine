@@ -177,35 +177,36 @@ def to_bills_clicked():
     window.hide()
     bills_window.show()
 
+def to_5_coins_clicked():
+    global coin_count, lcd_coin_counter, bills_window, coins_window, window
+    remaining_coins = dispense(coin_count, [5, 1])
+    coin_count = 0
+    lcd_coin_counter.display(coin_count)
+    if remaining_coins > 0:
+        dispense(remaining_coins, [1])
+    try:
+        bills_window.hide()
+        coins_window.hide()
+        window.show()
+    except:
+        window.show()
+
+def to_1_coins_clicked():
+    global coin_count, lcd_coin_counter, bills_window, coins_window, window
+    dispense(coin_count, [1])
+    coin_count = 0
+    lcd_coin_counter.display(coin_count)
+    try:
+        bills_window.hide()
+        coins_window.hide()
+        window.show()
+    except:
+        window.show()
 
 def to_coins_clicked():
-    global window, coins_window,bills_window,  coin_count,lcd_coin_counter
-     # check if coin count is greater than 0
+    global coin_count
     if coin_count == 0:
         return
-    def to_5_coins_clicked():
-        remaining_coins = dispense(coin_count, [5, 1])
-        coin_count = 0
-        lcd_coin_counter.display(coin_count)
-        if remaining_coins > 0:
-            dispense(remaining_coins, [1])
-        try:
-            bills_window.hide()
-            coins_window.hide()
-            window.show()
-        except:
-            window.show()
-
-    def to_1_coins_clicked():
-        dispense(coin_count, [1])
-        coin_count = 0
-        lcd_coin_counter.display(coin_count)
-        try:
-            bills_window.hide()
-            coins_window.hide()
-            window.show()
-        except:
-            window.show()
     coins_window.to_5_coins.clicked.connect(to_5_coins_clicked)
     coins_window.to_1_coins.clicked.connect(to_1_coins_clicked)
     window.hide()
