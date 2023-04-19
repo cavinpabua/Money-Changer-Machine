@@ -43,6 +43,12 @@ try:
     prev_input_4 = GPIO.input(ir_sensor_4_pin)  
     prev_input_5 = GPIO.input(ir_sensor_5_pin)
 
+    GPIO.output(relay_1_pin, GPIO.LOW)
+    GPIO.output(relay_2_pin, GPIO.LOW)
+    GPIO.output(relay_3_pin, GPIO.LOW)
+    GPIO.output(relay_4_pin, GPIO.LOW)
+    GPIO.output(relay_5_pin, GPIO.LOW)
+
 except:
     GPIO.cleanup()
     exit()
