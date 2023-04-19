@@ -213,10 +213,11 @@ def operate_dispenser(count, denomination):
             if input_state_1 != prev_input_1:
                 if input_state_1 == GPIO.LOW:
                     dispenser_count += 1
+                    if dispenser_count >= count:
+                        print("dispenser count reached")
+                        GPIO.output(relay_1_pin, GPIO.LOW)
                 prev_input_1 = input_state_1
                 time.sleep(0.5)
-        # turn off relay 1
-        GPIO.output(relay_1_pin, GPIO.LOW)
     elif denomination == 50:
         # turn on relay 2
         GPIO.output(relay_2_pin, GPIO.HIGH)
@@ -226,10 +227,12 @@ def operate_dispenser(count, denomination):
             if input_state_2 != prev_input_2:
                 if GPIO.input(ir_sensor_2_pin):
                     dispenser_count += 1
+                    if dispenser_count >= count:
+                        print("dispenser count reached")
+                        GPIO.output(relay_2_pin, GPIO.LOW)
                 prev_input_2 = input_state_2
                 time.sleep(0.5)
         # turn off relay 2
-        GPIO.output(relay_2_pin, GPIO.LOW)
     elif denomination == 20:
         # turn on relay 3
         GPIO.output(relay_3_pin, GPIO.HIGH)
@@ -239,10 +242,12 @@ def operate_dispenser(count, denomination):
             if input_state_3 != prev_input_3:
                 if GPIO.input(ir_sensor_3_pin):
                     dispenser_count += 1
+
+                    if dispenser_count >= count:
+                        print("dispenser count reached")
+                        GPIO.output(relay_3_pin, GPIO.LOW)
                 prev_input_3 = input_state_3
                 time.sleep(0.5)
-        # turn off relay 3
-        GPIO.output(relay_3_pin, GPIO.LOW)
     elif denomination == 5:
         # turn on relay 4
         print("Turning on relay 4")
@@ -254,10 +259,12 @@ def operate_dispenser(count, denomination):
                 print("changes detected in IR sensor 4")
                 if GPIO.input(ir_sensor_4_pin):
                     dispenser_count += 1
+                    if dispenser_count >= count:
+                        print("dispenser count reached")
+                        GPIO.output(relay_4_pin, GPIO.LOW)
                 prev_input_4 = input_state_4
                 time.sleep(0.5)
         # turn off relay 4
-        GPIO.output(relay_4_pin, GPIO.LOW)
     elif denomination == 1:
         # turn on relay 5
         GPIO.output(relay_5_pin, GPIO.HIGH)
@@ -267,10 +274,11 @@ def operate_dispenser(count, denomination):
             if input_state_5 != prev_input_5:
                 if GPIO.input(ir_sensor_5_pin):
                     dispenser_count += 1
+                    if dispenser_count >= count:
+                        print("dispenser count reached")
+                        GPIO.output(relay_5_pin, GPIO.LOW)
                 prev_input_5 = input_state_5
                 time.sleep(0.5)
-        # turn off relay 5
-        GPIO.output(relay_5_pin, GPIO.LOW)
     return count
 
 
