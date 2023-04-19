@@ -225,7 +225,12 @@ def dispense(coins, denominations):
         print("Number of {} bills: {}".format(denomination, coins // denomination))
         count = coins // denomination
         time.sleep(1)
-        operate_dispenser(count, denomination)
+        rem = 0
+        if count <= 0:
+            continue
+        rem = operate_dispenser(count, denomination)
+        if rem <= 0:
+            break
         coins = coins % denomination
         time.sleep(2)
     # show main.ui
