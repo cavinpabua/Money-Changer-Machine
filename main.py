@@ -292,6 +292,7 @@ def operate_dispenser(count, denomination):
             GPIO.output(relay_4_pin, GPIO.LOW)
     elif denomination == 1:
         # turn on relay 5
+        print("Turning on relay 5")
         GPIO.output(relay_5_pin, GPIO.HIGH)
         # loop and add to dispenser count, until count is reached, with delay to allow for IR sensor to detect and avoid false positives or spamming
         while dispenser_count < count:
