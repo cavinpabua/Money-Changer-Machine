@@ -245,11 +245,14 @@ def operate_dispenser(count, denomination):
         GPIO.output(relay_3_pin, GPIO.LOW)
     elif denomination == 5:
         # turn on relay 4
+        print("Turning on relay 4")
         GPIO.output(relay_4_pin, GPIO.HIGH)
         # loop and add to dispenser count, until count is reached, with delay to allow for IR sensor to detect and avoid false positives or spamming
         input_state_4 = GPIO.input(ir_sensor_4_pin)
         while dispenser_count < count:
+            print("Waiting for changes in IR sensor 4")
             if input_state_4 != prev_input_4:
+                print("changes detected in IR sensor 4")
                 if GPIO.input(ir_sensor_4_pin):
                     dispenser_count += 1
                 prev_input_4 = input_state_4
@@ -278,5 +281,5 @@ window.to_bills.clicked.connect(to_bills_clicked)
 window.to_coins.clicked.connect(to_coins_clicked)
 
 window.show()
-app.exec()
+sys.exit(app.exec())
 
