@@ -58,6 +58,8 @@ credit_timer = 0
 
 app = QtWidgets.QApplication([])
 window = uic.loadUi("main.ui")
+bills_window = uic.loadUi("to_bills.ui")
+coins_window = uic.loadUi("to_coins.ui")
 
 
 
@@ -109,10 +111,10 @@ GPIO.add_event_detect(bill_inhibitor_pin, GPIO.RISING, callback=inhibitor_callba
 
 # Define button click handlers
 def to_bills_clicked():
+    global window, bills_window
      # check if coin count is greater than 0
     if coin_count == 0:
         return
-    bills_window = uic.loadUi("to_bills.ui")
     def to_100_bills_clicked():
         global coin_count
         global lcd_coin_counter
@@ -152,15 +154,15 @@ def to_bills_clicked():
     bills_window.to_100_bills.clicked.connect(to_100_bills_clicked)
     bills_window.to_50_bills.clicked.connect(to_50_bills_clicked)
     bills_window.to_20_bills.clicked.connect(to_20_bills_clicked)
-    # window.hide()
+    window.hide()
     bills_window.show()
 
 
 def to_coins_clicked():
+    global window, coins_window
      # check if coin count is greater than 0
     if coin_count == 0:
         return
-    coins_window = uic.loadUi("to_coins.ui")
     def to_5_coins_clicked():
         global coin_count
         global lcd_coin_counter
@@ -178,7 +180,7 @@ def to_coins_clicked():
         lcd_coin_counter.display(coin_count)
     coins_window.to_5_coins.clicked.connect(to_5_coins_clicked)
     coins_window.to_1_coins.clicked.connect(to_1_coins_clicked)
-    # window.hide()
+    window.hide()
     coins_window.show()
 
 def dispense(coins, denominations):
