@@ -26,22 +26,18 @@ try:
     GPIO.setup(coin_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     GPIO.setup(bill_acceptor_pin, GPIO.IN)
     GPIO.setup(bill_inhibitor_pin, GPIO.IN)
+    
     GPIO.setup(relay_1_pin, GPIO.OUT)
     GPIO.setup(relay_2_pin, GPIO.OUT)
     GPIO.setup(relay_3_pin, GPIO.OUT)
     GPIO.setup(relay_4_pin, GPIO.OUT)
     GPIO.setup(relay_5_pin, GPIO.OUT)
+
     GPIO.setup(ir_sensor_1_pin, GPIO.IN)
     GPIO.setup(ir_sensor_2_pin, GPIO.IN)
     GPIO.setup(ir_sensor_3_pin, GPIO.IN)
     GPIO.setup(ir_sensor_4_pin, GPIO.IN)
     GPIO.setup(ir_sensor_5_pin, GPIO.IN)
-
-    prev_input_1 = GPIO.input(ir_sensor_1_pin)
-    prev_input_2 = GPIO.input(ir_sensor_2_pin)
-    prev_input_3 = GPIO.input(ir_sensor_3_pin)
-    prev_input_4 = GPIO.input(ir_sensor_4_pin)  
-    prev_input_5 = GPIO.input(ir_sensor_5_pin)
 
     GPIO.output(relay_1_pin, GPIO.LOW)
     GPIO.output(relay_2_pin, GPIO.LOW)
@@ -239,12 +235,12 @@ def dispense(coins, denominations):
 
 
 def operate_dispenser(count, denomination):
-    global prev_input_1, prev_input_2, prev_input_3, prev_input_4, prev_input_5
     dispenser_count = 0
     time.sleep(1)
     if denomination == 100:
         # turn on relay 1
         GPIO.output(relay_1_pin, GPIO.HIGH)
+        prev_input_1 = GPIO.input(ir_sensor_1_pin) 
         # loop and add to dispenser count, until count is reached, with delay to allow for IR sensor to detect and avoid false positives or spamming
         while dispenser_count < count:
             input_state_1 = GPIO.input(ir_sensor_1_pin)
@@ -258,6 +254,7 @@ def operate_dispenser(count, denomination):
     elif denomination == 50:
         # turn on relay 2
         GPIO.output(relay_2_pin, GPIO.HIGH)
+        prev_input_2 = GPIO.input(ir_sensor_2_pin) 
         # loop and add to dispenser count, until count is reached, with delay to allow for IR sensor to detect and avoid false positives or spamming
         while dispenser_count < count:
             input_state_2 = GPIO.input(ir_sensor_2_pin)
@@ -271,6 +268,7 @@ def operate_dispenser(count, denomination):
     elif denomination == 20:
         # turn on relay 3
         GPIO.output(relay_3_pin, GPIO.HIGH)
+        prev_input_3 = GPIO.input(ir_sensor_3_pin) 
         # loop and add to dispenser count, until count is reached, with delay to allow for IR sensor to detect and avoid false positives or spamming
         while dispenser_count < count:
             input_state_3 = GPIO.input(ir_sensor_3_pin)
@@ -285,6 +283,7 @@ def operate_dispenser(count, denomination):
         # turn on relay 4
         print("Turning on relay 4")
         GPIO.output(relay_4_pin, GPIO.HIGH)
+        prev_input_4 = GPIO.input(ir_sensor_4_pin)  
         # loop and add to dispenser count, until count is reached, with delay to allow for IR sensor to detect and avoid false positives or spamming
         while dispenser_count < count:
             input_state_4 = GPIO.input(ir_sensor_4_pin)
@@ -299,6 +298,8 @@ def operate_dispenser(count, denomination):
         # turn on relay 5
         print("Turning on relay 5")
         GPIO.output(relay_5_pin, GPIO.HIGH)
+
+        prev_input_5 = GPIO.input(ir_sensor_5_pin)  
         # loop and add to dispenser count, until count is reached, with delay to allow for IR sensor to detect and avoid false positives or spamming
         while dispenser_count < count:
             input_state_5 = GPIO.input(ir_sensor_5_pin)
