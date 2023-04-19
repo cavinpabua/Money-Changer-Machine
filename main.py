@@ -224,10 +224,10 @@ def dispense(coins, denominations):
     for denomination in denominations:
         print("Number of {} bills: {}".format(denomination, coins // denomination))
         count = coins // denomination
-        rem = operate_dispenser(count, denomination)
+        time.sleep(1)
+        operate_dispenser(count, denomination)
         coins = coins % denomination
         time.sleep(2)
-        print("Rem: {}".format(rem), "Denomination: {}".format(denomination))
     # show main.ui
     
     return coins
@@ -236,7 +236,7 @@ def dispense(coins, denominations):
 def operate_dispenser(count, denomination):
     global prev_input_1, prev_input_2, prev_input_3, prev_input_4, prev_input_5
     dispenser_count = 0
-    
+    time.sleep(1)
     if denomination == 100:
         # turn on relay 1
         GPIO.output(relay_1_pin, GPIO.HIGH)
