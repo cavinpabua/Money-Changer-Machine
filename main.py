@@ -22,32 +22,29 @@ ir_sensor_2_pin = 25
 ir_sensor_3_pin = 8
 ir_sensor_4_pin = 7
 ir_sensor_5_pin = 12
+try:
+    GPIO.setup(coin_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+    GPIO.setup(bill_acceptor_pin, GPIO.IN)
+    GPIO.setup(bill_inhibitor_pin, GPIO.IN)
+    GPIO.setup(relay_1_pin, GPIO.OUT)
+    GPIO.setup(relay_2_pin, GPIO.OUT)
+    GPIO.setup(relay_3_pin, GPIO.OUT)
+    GPIO.setup(relay_4_pin, GPIO.OUT)
+    GPIO.setup(relay_5_pin, GPIO.OUT)
+    GPIO.setup(ir_sensor_1_pin, GPIO.IN)
+    GPIO.setup(ir_sensor_2_pin, GPIO.IN)
+    GPIO.setup(ir_sensor_3_pin, GPIO.IN)
+    GPIO.setup(ir_sensor_4_pin, GPIO.IN)
+    GPIO.setup(ir_sensor_5_pin, GPIO.IN)
 
-GPIO.setup(coin_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-GPIO.setup(bill_acceptor_pin, GPIO.IN)
-GPIO.setup(bill_inhibitor_pin, GPIO.IN)
-GPIO.setup(relay_1_pin, GPIO.OUT)
-GPIO.setup(relay_2_pin, GPIO.OUT)
-GPIO.setup(relay_3_pin, GPIO.OUT)
-GPIO.setup(relay_4_pin, GPIO.OUT)
-GPIO.setup(relay_5_pin, GPIO.OUT)
-GPIO.setup(ir_sensor_1_pin, GPIO.IN)
-GPIO.setup(ir_sensor_2_pin, GPIO.IN)
-GPIO.setup(ir_sensor_3_pin, GPIO.IN)
-GPIO.setup(ir_sensor_4_pin, GPIO.IN)
-GPIO.setup(ir_sensor_5_pin, GPIO.IN)
-
-prev_input_1 = GPIO.input(ir_sensor_1_pin)
-prev_input_2 = GPIO.input(ir_sensor_2_pin)
-prev_input_3 = GPIO.input(ir_sensor_3_pin)
-prev_input_4 = GPIO.input(ir_sensor_4_pin)  
-prev_input_5 = GPIO.input(ir_sensor_5_pin)
-
-GPIO.output(relay_1_pin, GPIO.LOW)
-GPIO.output(relay_2_pin, GPIO.LOW)
-GPIO.output(relay_3_pin, GPIO.LOW)
-GPIO.output(relay_4_pin, GPIO.LOW)
-GPIO.output(relay_5_pin, GPIO.LOW)
+    prev_input_1 = GPIO.input(ir_sensor_1_pin)
+    prev_input_2 = GPIO.input(ir_sensor_2_pin)
+    prev_input_3 = GPIO.input(ir_sensor_3_pin)
+    prev_input_4 = GPIO.input(ir_sensor_4_pin)  
+    prev_input_5 = GPIO.input(ir_sensor_5_pin)
+except:
+    GPIO.cleanup()
+    exit()
 
 
 coin_count = 0
