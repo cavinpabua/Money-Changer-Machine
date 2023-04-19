@@ -123,7 +123,7 @@ def to_bills_clicked():
         return
     def to_100_bills_clicked():
         global coin_count
-        global lcd_coin_counter
+        global lcd_coin_counter, bills_window, coins_window, window
         bills_to_dispense = [100, 50, 20]
         remaining_coins = dispense(coin_count, bills_to_dispense)
         coin_count = remaining_coins
@@ -141,7 +141,7 @@ def to_bills_clicked():
             window.show()
     def to_50_bills_clicked():
         global coin_count
-        global lcd_coin_counter
+        global lcd_coin_counter, bills_window, coins_window, window
         bills_to_dispense = [50, 20]
         remaining_coins = dispense(coin_count, bills_to_dispense)
         coin_count = remaining_coins
@@ -159,7 +159,7 @@ def to_bills_clicked():
             window.show()
     def to_20_bills_clicked():
         global coin_count
-        global lcd_coin_counter
+        global lcd_coin_counter, bills_window, coins_window, window
         bills_to_dispense = [20]
         remaining_coins = dispense(coin_count, bills_to_dispense)
         coin_count = remaining_coins
@@ -189,7 +189,7 @@ def to_coins_clicked():
         return
     def to_5_coins_clicked():
         global coin_count
-        global lcd_coin_counter
+        global lcd_coin_counter, bills_window, coins_window, window
         remaining_coins = dispense(coin_count, [5, 1])
         coin_count = 0
         lcd_coin_counter.display(coin_count)
@@ -204,7 +204,7 @@ def to_coins_clicked():
 
     def to_1_coins_clicked():
         global coin_count
-        global lcd_coin_counter
+        global lcd_coin_counter, bills_window, coins_window, window
         dispense(coin_count, [1])
         coin_count = 0
         lcd_coin_counter.display(coin_count)
