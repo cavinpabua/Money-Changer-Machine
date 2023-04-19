@@ -55,6 +55,7 @@ last_time = 0
 DELAY_TIME = 0.5
 credit_flag = False
 credit_timer = 0
+COUNT_DELAY = 0.1
 
 
 
@@ -246,7 +247,7 @@ def operate_dispenser(count, denomination):
                 dispenser_count += 1
                 print("dispenser count: {}".format(dispenser_count))
                 prev_input_1 = input_state_1
-                time.sleep(0.5)
+                time.sleep(COUNT_DELAY)
         if dispenser_count >= count:
             GPIO.output(relay_1_pin, GPIO.LOW)
     elif denomination == 50:
@@ -260,7 +261,7 @@ def operate_dispenser(count, denomination):
                 dispenser_count += 1
                 print("dispenser count: {}".format(dispenser_count))
                 prev_input_2 = input_state_2
-                time.sleep(0.5)
+                time.sleep(COUNT_DELAY)
         if dispenser_count >= count:
             GPIO.output(relay_2_pin, GPIO.LOW)
     elif denomination == 20:
@@ -274,7 +275,7 @@ def operate_dispenser(count, denomination):
                 dispenser_count += 1
                 print("dispenser count: {}".format(dispenser_count))
                 prev_input_3 = input_state_3
-                time.sleep(0.5)
+                time.sleep(COUNT_DELAY)
         if dispenser_count >= count:
             GPIO.output(relay_3_pin, GPIO.LOW)
     elif denomination == 5:
@@ -291,7 +292,7 @@ def operate_dispenser(count, denomination):
                     GPIO.output(relay_4_pin, GPIO.LOW)
                 print("dispenser count: {}".format(dispenser_count))
                 prev_input_4 = input_state_4
-                time.sleep(0.5)
+                time.sleep(COUNT_DELAY)
         if dispenser_count >= count:
             GPIO.output(relay_4_pin, GPIO.LOW)
     elif denomination == 1:
@@ -308,7 +309,7 @@ def operate_dispenser(count, denomination):
                     GPIO.output(relay_5_pin, GPIO.LOW)
                 print("dispenser count: {}".format(dispenser_count))
                 prev_input_5 = input_state_5
-                time.sleep(0.5)
+                time.sleep(COUNT_DELAY)
         if dispenser_count >= count:
             GPIO.output(relay_5_pin, GPIO.LOW)
     return count
