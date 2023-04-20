@@ -24,8 +24,8 @@ ir_sensor_4_pin = 7
 ir_sensor_5_pin = 12
 try:
     GPIO.setup(coin_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-    GPIO.setup(bill_acceptor_pin, GPIO.IN)
-    GPIO.setup(bill_inhibitor_pin, GPIO.IN)
+    GPIO.setup(bill_acceptor_pin, GPIO.IN,pull_up_down=GPIO.PUD_UP)
+    GPIO.setup(bill_inhibitor_pin, GPIO.IN,pull_up_down=GPIO.PUD_UP)
 
     GPIO.setup(relay_1_pin, GPIO.OUT)
     GPIO.setup(relay_2_pin, GPIO.OUT)
@@ -73,6 +73,7 @@ lcd_coin_counter = window.lcd_coin_counter
 def credit_callback(channel):
     global credit_flag
     global credit_timer
+    print("pumasok sa credit_callback")
 
     # Set credit flag and timer
     credit_flag = True
@@ -83,6 +84,7 @@ def inhibitor_callback(channel):
     global credit_flag
     global credit_timer
     global coin_count
+    print("pumasok sa inhibitor_callback")
 
     # Check if credit flag is set and delay time has passed
     if credit_flag and (time.time() - credit_timer) >= DELAY_TIME:
@@ -107,9 +109,9 @@ def pulse_detected(channel):
 
 
 GPIO.add_event_detect(coin_pin, GPIO.FALLING, callback=pulse_detected)
-GPIO.add_event_detect(bill_acceptor_pin, GPIO.RISING, callback=credit_callback)
+GPIO.add_event_detect(bill_acceptor_pin, GPIO.FALLING, callback=credit_callback)
 # Set up interrupt detection for Inhibitor+ signal
-GPIO.add_event_detect(bill_inhibitor_pin, GPIO.RISING, callback=inhibitor_callback)
+GPIO.add_event_detect(bill_inhibitor_pin, GPIO.FALLING, callback=inhibitor_callback)
 
 
 # Define button click handlers
@@ -235,77 +237,73 @@ def dispense(coins, denominations):
 
 def operate_dispenser(count, denomination):
     dispenser_count = 0
-    time.sleep(1)
     if denomination == 100:
-        # turn on relay 1
+        while GPIO.input(ir_sensor_1_pin) == GPIO.HIGH:
+            time.sleep(0.01)
+        # print("Turning on relay 5")
         GPIO.output(relay_1_pin, GPIO.HIGH)
-        prev_input_1 = GPIO.input(ir_sensor_1_pin) 
-        # loop and add to dispenser count, until count is reached, with delay to allow for IR sensor to detect and avoid false positives or spamming
+        # print("TURNED ON!")
         while dispenser_count < count:
-            input_state_1 = GPIO.input(ir_sensor_1_pin)
-            if input_state_1 != prev_input_1:
+            if GPIO.input(ir_sensor_1_pin) == GPIO.HIGH:
                 dispenser_count += 1
-                print("dispenser count: {}".format(dispenser_count))
-                prev_input_1 = input_state_1
-                time.sleep(COUNT_DELAY)
-        if dispenser_count >= count:
-            GPIO.output(relay_1_pin, GPIO.LOW)
+                # print("COUNT:", dispenser_count)
+                if dispenser_count >= count:
+                    GPIO.output(relay_1_pin, GPIO.LOW)
+                while GPIO.input(ir_sensor_1_pin) == GPIO.HIGH:
+                    time.sleep(0.01)
     elif denomination == 50:
-        # turn on relay 2
+        while GPIO.input(ir_sensor_2_pin) == GPIO.HIGH:
+            time.sleep(0.01)
+        # print("Turning on relay 5")
         GPIO.output(relay_2_pin, GPIO.HIGH)
-        prev_input_2 = GPIO.input(ir_sensor_2_pin) 
-        # loop and add to dispenser count, until count is reached, with delay to allow for IR sensor to detect and avoid false positives or spamming
+        # print("TURNED ON!")
         while dispenser_count < count:
-            input_state_2 = GPIO.input(ir_sensor_2_pin)
-            if input_state_2 != prev_input_2:
+            if GPIO.input(ir_sensor_2_pin) == GPIO.HIGH:
                 dispenser_count += 1
-                print("dispenser count: {}".format(dispenser_count))
-                prev_input_2 = input_state_2
-                time.sleep(COUNT_DELAY)
-        if dispenser_count >= count:
-            GPIO.output(relay_2_pin, GPIO.LOW)
+                # print("COUNT:", dispenser_count)
+                if dispenser_count >= count:
+                    GPIO.output(relay_2_pin, GPIO.LOW)
+                while GPIO.input(ir_sensor_2_pin) == GPIO.HIGH:
+                    time.sleep(0.01)
     elif denomination == 20:
-        # turn on relay 3
+        while GPIO.input(ir_sensor_3_pin) == GPIO.HIGH:
+            time.sleep(0.01)
+        # print("Turning on relay 5")
         GPIO.output(relay_3_pin, GPIO.HIGH)
-        prev_input_3 = GPIO.input(ir_sensor_3_pin) 
-        # loop and add to dispenser count, until count is reached, with delay to allow for IR sensor to detect and avoid false positives or spamming
+        # print("TURNED ON!")
         while dispenser_count < count:
-            input_state_3 = GPIO.input(ir_sensor_3_pin)
-            if input_state_3 != prev_input_3:
+            if GPIO.input(ir_sensor_3_pin) == GPIO.HIGH:
                 dispenser_count += 1
-                print("dispenser count: {}".format(dispenser_count))
-                prev_input_3 = input_state_3
-                time.sleep(COUNT_DELAY)
-        if dispenser_count >= count:
-            GPIO.output(relay_3_pin, GPIO.LOW)
+                # print("COUNT:", dispenser_count)
+                if dispenser_count >= count:
+                    GPIO.output(relay_3_pin, GPIO.LOW)
+                while GPIO.input(ir_sensor_3_pin) == GPIO.HIGH:
+                    time.sleep(0.01)
     elif denomination == 5:
         # turn on relay 4
         while GPIO.input(ir_sensor_4_pin) == GPIO.HIGH:
             time.sleep(0.01)
-        print("Turning on relay 4")
+        # print("Turning on relay 4")
         GPIO.output(relay_4_pin, GPIO.HIGH)
-        print("turned ON!")
+        # print("turned ON!")
         while dispenser_count < count:
             if GPIO.input(ir_sensor_4_pin) == GPIO.HIGH:
                 dispenser_count += 1
-                print("COUNT:", dispenser_count)
+                # print("COUNT:", dispenser_count)
                 if dispenser_count >= count:
                     GPIO.output(relay_4_pin, GPIO.LOW)
                 while GPIO.input(ir_sensor_4_pin) == GPIO.HIGH:
                     time.sleep(0.01)
     elif denomination == 1:
-        # turn on relay 5
-        # wait to turn LOW
         while GPIO.input(ir_sensor_5_pin) == GPIO.HIGH:
             time.sleep(0.01)
-
-        print("Turning on relay 5")
+        # print("Turning on relay 5")
         GPIO.output(relay_5_pin, GPIO.HIGH)
-        print("TURNED ON!")
+        # print("TURNED ON!")
         while dispenser_count < count:
             if GPIO.input(ir_sensor_5_pin) == GPIO.HIGH:
                 dispenser_count += 1
-                print("COUNT:", dispenser_count)
+                # print("COUNT:", dispenser_count)
                 if dispenser_count >= count:
                     GPIO.output(relay_5_pin, GPIO.LOW)
                 while GPIO.input(ir_sensor_5_pin) == GPIO.HIGH:
