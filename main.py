@@ -11,7 +11,7 @@ GPIO.setmode(GPIO.BCM)
 # Define pins
 coin_pin = 2
 HI_PIN = 21
-bill_acceptor_pin = 20
+bill_acceptor_pin = 3
 bill_inhibitor_pin = 6
 relay_1_pin = 17
 relay_2_pin = 18
