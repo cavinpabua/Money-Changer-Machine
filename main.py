@@ -11,7 +11,7 @@ GPIO.setmode(GPIO.BCM)
 # Define pins
 coin_pin = 2
 HI_PIN = 21
-bill_acceptor_pin = 5
+bill_acceptor_pin = 20
 bill_inhibitor_pin = 6
 relay_1_pin = 17
 relay_2_pin = 18
@@ -25,7 +25,7 @@ ir_sensor_4_pin = 7
 ir_sensor_5_pin = 12
 try:
     GPIO.setup(coin_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-    GPIO.setup(bill_acceptor_pin, GPIO.IN,pull_up_down=GPIO.PUD_UP)
+    GPIO.setup(bill_acceptor_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     GPIO.setup(bill_inhibitor_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
     GPIO.setup(relay_1_pin, GPIO.OUT)
