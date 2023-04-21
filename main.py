@@ -139,9 +139,9 @@ def to_bills_clicked():
         try:
             bills_window.hide()
             coins_window.hide()
-            window.show()
+            window.showFullScreen()
         except:
-            window.show()
+            window.showFullScreen()
     def to_50_bills_clicked():
         global coin_count
         global lcd_coin_counter, bills_window, coins_window, window
@@ -157,9 +157,9 @@ def to_bills_clicked():
         try:
             bills_window.hide()
             coins_window.hide()
-            window.show()
+            window.showFullScreen()
         except:
-            window.show()
+            window.showFullScreen()
     def to_20_bills_clicked():
         global coin_count
         global lcd_coin_counter, bills_window, coins_window, window
@@ -175,14 +175,14 @@ def to_bills_clicked():
         try:
             bills_window.hide()
             coins_window.hide()
-            window.show()
+            window.showFullScreen()
         except:
-            window.show()
+            window.showFullScreen()
     bills_window.to_100_bills.clicked.connect(to_100_bills_clicked)
     bills_window.to_50_bills.clicked.connect(to_50_bills_clicked)
     bills_window.to_20_bills.clicked.connect(to_20_bills_clicked)
     window.hide()
-    bills_window.show()
+    bills_window.showFullScreen()
 
 def to_5_coins_clicked():
     global coin_count, lcd_coin_counter, bills_window, coins_window, window
@@ -194,9 +194,9 @@ def to_5_coins_clicked():
     try:
         bills_window.hide()
         coins_window.hide()
-        window.show()
+        window.showFullScreen()
     except:
-        window.show()
+        window.showFullScreen()
 
 def to_1_coins_clicked():
     global coin_count, lcd_coin_counter, bills_window, coins_window, window
@@ -206,9 +206,9 @@ def to_1_coins_clicked():
     try:
         bills_window.hide()
         coins_window.hide()
-        window.show()
+        window.showFullScreen()
     except:
-        window.show()
+        window.showFullScreen()
 
 def to_coins_clicked():
     global coin_count
@@ -217,13 +217,13 @@ def to_coins_clicked():
     coins_window.to_5_coins.clicked.connect(to_5_coins_clicked)
     coins_window.to_1_coins.clicked.connect(to_1_coins_clicked)
     window.hide()
-    coins_window.show()
+    coins_window.showFullScreen()
 
 def dispense(coins, denominations):
     global window, coins_window, bills_window, loader_window
     if coins == 0:
         return coins
-    loader_window.show()
+    loader_window.showFullScreen()
     for denomination in denominations:
         print("Number of {} bills: {}".format(denomination, coins // denomination))
         count = coins // denomination
@@ -321,6 +321,6 @@ def operate_dispenser(count, denomination):
 window.to_bills.clicked.connect(to_bills_clicked)
 window.to_coins.clicked.connect(to_coins_clicked)
 
-window.show()
+window.showFullScreen()
 sys.exit(app.exec())
 
