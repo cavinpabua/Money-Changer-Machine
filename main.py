@@ -84,7 +84,7 @@ def credit_callback(channel):
 def inhibitor_callback(channel):
     global credit_flag
     global credit_timer
-    global coin_count
+    global coin_count, lcd_coin_counter
     # print("pumasok sa inhibitor_callback")
 
     # Check if credit flag is set and delay time has passed
@@ -93,7 +93,7 @@ def inhibitor_callback(channel):
         print("credited!")
         coin_count += 1
         credit_flag = False
-        
+
         lcd_coin_counter.display(coin_count)
 
 
