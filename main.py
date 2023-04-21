@@ -88,11 +88,13 @@ def inhibitor_callback(channel):
     # print("pumasok sa inhibitor_callback")
 
     # Check if credit flag is set and delay time has passed
-    if credit_flag: # and (time.time() - credit_timer) >= DELAY_TIME:
+    if credit_flag and (time.time() - credit_timer) >= DELAY_TIME:
         # Add credit and reset credit flag
         print("credited!")
         coin_count += 1
         credit_flag = False
+        
+        lcd_coin_counter.display(coin_count)
 
 
 def pulse_detected(channel):
