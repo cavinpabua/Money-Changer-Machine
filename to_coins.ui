@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>480</height>
+    <width>900</width>
+    <height>550</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,8 +16,8 @@
   <widget class="QPushButton" name="to_5_coins">
    <property name="geometry">
     <rect>
-     <x>140</x>
-     <y>150</y>
+     <x>170</x>
+     <y>190</y>
      <width>221</width>
      <height>131</height>
     </rect>
@@ -29,8 +29,8 @@
   <widget class="QPushButton" name="to_1_coins">
    <property name="geometry">
     <rect>
-     <x>440</x>
-     <y>150</y>
+     <x>510</x>
+     <y>190</y>
      <width>211</width>
      <height>131</height>
     </rect>
