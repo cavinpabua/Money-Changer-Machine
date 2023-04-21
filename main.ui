@@ -16,7 +16,7 @@
   <widget class="QLCDNumber" name="lcd_coin_counter">
    <property name="geometry">
     <rect>
-     <x>330</x>
+     <x>400</x>
      <y>70</y>
      <width>261</width>
      <height>111</height>
@@ -26,7 +26,7 @@
   <widget class="QPushButton" name="to_coins">
    <property name="geometry">
     <rect>
-     <x>530</x>
+     <x>590</x>
      <y>260</y>
      <width>191</width>
      <height>111</height>
@@ -39,7 +39,7 @@
   <widget class="QPushButton" name="to_bills">
    <property name="geometry">
     <rect>
-     <x>230</x>
+     <x>270</x>
      <y>260</y>
      <width>191</width>
      <height>111</height>

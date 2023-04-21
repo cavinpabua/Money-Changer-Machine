@@ -16,7 +16,7 @@
   <widget class="QPushButton" name="to_100_bills">
    <property name="geometry">
     <rect>
-     <x>110</x>
+     <x>140</x>
      <y>210</y>
      <width>191</width>
      <height>101</height>
@@ -29,7 +29,7 @@
   <widget class="QPushButton" name="to_50_bills">
    <property name="geometry">
     <rect>
-     <x>350</x>
+     <x>380</x>
      <y>210</y>
      <width>191</width>
      <height>101</height>
@@ -42,7 +42,7 @@
   <widget class="QPushButton" name="to_20_bills">
    <property name="geometry">
     <rect>
-     <x>590</x>
+     <x>620</x>
      <y>210</y>
      <width>201</width>
      <height>101</height>

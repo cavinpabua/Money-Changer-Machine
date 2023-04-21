@@ -16,7 +16,7 @@
   <widget class="QPushButton" name="to_5_coins">
    <property name="geometry">
     <rect>
-     <x>170</x>
+     <x>220</x>
      <y>190</y>
      <width>221</width>
      <height>131</height>
@@ -29,7 +29,7 @@
   <widget class="QPushButton" name="to_1_coins">
    <property name="geometry">
     <rect>
-     <x>510</x>
+     <x>580</x>
      <y>190</y>
      <width>211</width>
      <height>131</height>
