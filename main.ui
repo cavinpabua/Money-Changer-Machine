@@ -32,6 +32,12 @@
      <height>111</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>27</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
    <property name="text">
     <string>TO COINS</string>
    </property>
@@ -44,6 +50,12 @@
      <width>191</width>
      <height>111</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>27</pointsize>
+     <bold>true</bold>
+    </font>
    </property>
    <property name="text">
     <string>TO BILLS</string>

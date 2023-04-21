@@ -22,6 +22,12 @@
      <height>131</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>25</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
    <property name="text">
     <string>TO 5 COINS</string>
    </property>
@@ -34,6 +40,12 @@
      <width>211</width>
      <height>131</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>25</pointsize>
+     <bold>true</bold>
+    </font>
    </property>
    <property name="text">
     <string>TO 1 COINS</string>

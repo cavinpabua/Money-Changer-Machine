@@ -22,6 +22,12 @@
      <height>101</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>22</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
    <property name="text">
     <string>100 BILLS</string>
    </property>
@@ -35,6 +41,12 @@
      <height>101</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>22</pointsize>
+     <bold>true</bold>
+    </font>
+   </property>
    <property name="text">
     <string>50 BILLS</string>
    </property>
@@ -47,6 +59,12 @@
      <width>201</width>
      <height>101</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>22</pointsize>
+     <bold>true</bold>
+    </font>
    </property>
    <property name="text">
     <string>20 BILLS</string>
