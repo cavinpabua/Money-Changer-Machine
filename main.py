@@ -10,6 +10,7 @@ GPIO.setmode(GPIO.BCM)
 
 # Define pins
 coin_pin = 2
+HI_PIN = 21
 bill_acceptor_pin = 5
 bill_inhibitor_pin = 6
 relay_1_pin = 17
@@ -33,6 +34,8 @@ try:
     GPIO.setup(relay_4_pin, GPIO.OUT)
     GPIO.setup(relay_5_pin, GPIO.OUT)
 
+    GPIO.setup(HI_PIN, GPIO.OUT)
+
     GPIO.setup(ir_sensor_1_pin, GPIO.IN)
     GPIO.setup(ir_sensor_2_pin, GPIO.IN)
     GPIO.setup(ir_sensor_3_pin, GPIO.IN)
@@ -44,6 +47,8 @@ try:
     GPIO.output(relay_3_pin, GPIO.LOW)
     GPIO.output(relay_4_pin, GPIO.LOW)
     GPIO.output(relay_5_pin, GPIO.LOW)
+
+    GPIO.output(HI_PIN, GPIO.HIGH)
 
 except:
     GPIO.cleanup()
