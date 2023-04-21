@@ -25,7 +25,7 @@ ir_sensor_5_pin = 12
 try:
     GPIO.setup(coin_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
     GPIO.setup(bill_acceptor_pin, GPIO.IN,pull_up_down=GPIO.PUD_UP)
-    GPIO.setup(bill_inhibitor_pin, GPIO.IN)
+    GPIO.setup(bill_inhibitor_pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
     GPIO.setup(relay_1_pin, GPIO.OUT)
     GPIO.setup(relay_2_pin, GPIO.OUT)
@@ -113,9 +113,9 @@ def pulse_detected(channel):
 
 
 GPIO.add_event_detect(coin_pin, GPIO.FALLING, callback=pulse_detected)
-GPIO.add_event_detect(bill_acceptor_pin, GPIO.RISING, callback=credit_callback)
+GPIO.add_event_detect(bill_acceptor_pin, GPIO.FALLING, callback=credit_callback)
 # Set up interrupt detection for Inhibitor+ signal
-GPIO.add_event_detect(bill_inhibitor_pin, GPIO.RISING, callback=inhibitor_callback)
+GPIO.add_event_detect(bill_inhibitor_pin, GPIO.FALLING, callback=inhibitor_callback)
 
 
 # Define button click handlers
