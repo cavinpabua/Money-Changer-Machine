@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>514</width>
-    <height>307</height>
+    <width>800</width>
+    <height>480</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,10 +16,10 @@
   <widget class="QPushButton" name="to_100_bills">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>100</y>
-     <width>141</width>
-     <height>71</height>
+     <x>70</x>
+     <y>170</y>
+     <width>191</width>
+     <height>101</height>
     </rect>
    </property>
    <property name="text">
@@ -29,10 +29,10 @@
   <widget class="QPushButton" name="to_50_bills">
    <property name="geometry">
     <rect>
-     <x>190</x>
-     <y>100</y>
-     <width>141</width>
-     <height>71</height>
+     <x>300</x>
+     <y>170</y>
+     <width>191</width>
+     <height>101</height>
     </rect>
    </property>
    <property name="text">
@@ -42,10 +42,10 @@
   <widget class="QPushButton" name="to_20_bills">
    <property name="geometry">
     <rect>
-     <x>350</x>
-     <y>100</y>
-     <width>141</width>
-     <height>71</height>
+     <x>530</x>
+     <y>170</y>
+     <width>201</width>
+     <height>101</height>
     </rect>
    </property>
    <property name="text">

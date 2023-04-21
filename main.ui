@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>514</width>
-    <height>276</height>
+    <width>800</width>
+    <height>480</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,20 +16,20 @@
   <widget class="QLCDNumber" name="lcd_coin_counter">
    <property name="geometry">
     <rect>
-     <x>180</x>
-     <y>30</y>
-     <width>151</width>
-     <height>61</height>
+     <x>270</x>
+     <y>50</y>
+     <width>261</width>
+     <height>111</height>
     </rect>
    </property>
   </widget>
   <widget class="QPushButton" name="to_coins">
    <property name="geometry">
     <rect>
-     <x>290</x>
-     <y>140</y>
-     <width>151</width>
-     <height>81</height>
+     <x>440</x>
+     <y>230</y>
+     <width>191</width>
+     <height>111</height>
     </rect>
    </property>
    <property name="text">
@@ -39,10 +39,10 @@
   <widget class="QPushButton" name="to_bills">
    <property name="geometry">
     <rect>
-     <x>70</x>
-     <y>140</y>
-     <width>151</width>
-     <height>81</height>
+     <x>180</x>
+     <y>230</y>
+     <width>191</width>
+     <height>111</height>
     </rect>
    </property>
    <property name="text">
