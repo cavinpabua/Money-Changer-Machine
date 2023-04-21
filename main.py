@@ -63,6 +63,7 @@ app = QtWidgets.QApplication([])
 window = uic.loadUi("main.ui")
 bills_window = uic.loadUi("to_bills.ui")
 coins_window = uic.loadUi("to_coins.ui")
+loader_window = uic.loadUi("loader.ui")
 
 
 
@@ -216,9 +217,10 @@ def to_coins_clicked():
     coins_window.show()
 
 def dispense(coins, denominations):
-    global window, coins_window, bills_window
+    global window, coins_window, bills_window, loader_window
     if coins == 0:
         return coins
+    loader_window.show()
     for denomination in denominations:
         print("Number of {} bills: {}".format(denomination, coins // denomination))
         count = coins // denomination
@@ -232,6 +234,7 @@ def dispense(coins, denominations):
             break
         time.sleep(2)
     
+    loader_window.hide()
     return coins
 
 
