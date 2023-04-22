@@ -10,9 +10,8 @@ GPIO.setmode(GPIO.BCM)
 
 # Define pins
 coin_pin = 2
-HI_PIN = 21
-bill_acceptor_pin = 3
-bill_inhibitor_pin = 6
+bill_acceptor_pin = 9
+bill_inhibitor_pin = 10
 relay_1_pin = 17
 relay_2_pin = 18
 relay_3_pin = 27
@@ -34,7 +33,6 @@ try:
     GPIO.setup(relay_4_pin, GPIO.OUT)
     GPIO.setup(relay_5_pin, GPIO.OUT)
 
-    GPIO.setup(HI_PIN, GPIO.OUT)
 
     GPIO.setup(ir_sensor_1_pin, GPIO.IN)
     GPIO.setup(ir_sensor_2_pin, GPIO.IN)
@@ -48,7 +46,6 @@ try:
     GPIO.output(relay_4_pin, GPIO.LOW)
     GPIO.output(relay_5_pin, GPIO.LOW)
 
-    GPIO.output(HI_PIN, GPIO.HIGH)
 
 except:
     GPIO.cleanup()
@@ -131,7 +128,7 @@ def to_bills_clicked():
         return
     def to_100_bills_clicked():
         global coin_count
-        global lcd_coin_counter, bills_window, coins_window, window
+        global lcd_coin_counter, bills_window, coins_window, window, loader_window
         bills_to_dispense = [100, 50, 20]
         remaining_coins = dispense(coin_count, bills_to_dispense)
         coin_count = remaining_coins
@@ -144,12 +141,14 @@ def to_bills_clicked():
         try:
             bills_window.hide()
             coins_window.hide()
+
+            loader_window.hide()
             window.showFullScreen()
         except:
             window.showFullScreen()
     def to_50_bills_clicked():
         global coin_count
-        global lcd_coin_counter, bills_window, coins_window, window
+        global lcd_coin_counter, bills_window, coins_window, window, loader_window
         bills_to_dispense = [50, 20]
         remaining_coins = dispense(coin_count, bills_to_dispense)
         coin_count = remaining_coins
@@ -162,12 +161,14 @@ def to_bills_clicked():
         try:
             bills_window.hide()
             coins_window.hide()
+
+            loader_window.hide()
             window.showFullScreen()
         except:
             window.showFullScreen()
     def to_20_bills_clicked():
         global coin_count
-        global lcd_coin_counter, bills_window, coins_window, window
+        global lcd_coin_counter, bills_window, coins_window, window, loader_window
         bills_to_dispense = [20]
         remaining_coins = dispense(coin_count, bills_to_dispense)
         coin_count = remaining_coins
@@ -180,6 +181,8 @@ def to_bills_clicked():
         try:
             bills_window.hide()
             coins_window.hide()
+
+            loader_window.hide()
             window.showFullScreen()
         except:
             window.showFullScreen()
@@ -190,7 +193,7 @@ def to_bills_clicked():
     bills_window.showFullScreen()
 
 def to_5_coins_clicked():
-    global coin_count, lcd_coin_counter, bills_window, coins_window, window
+    global coin_count, lcd_coin_counter, bills_window, coins_window, window, loader_window
     remaining_coins = dispense(coin_count, [5, 1])
     coin_count = 0
     lcd_coin_counter.display(coin_count)
@@ -199,18 +202,21 @@ def to_5_coins_clicked():
     try:
         bills_window.hide()
         coins_window.hide()
+
+        loader_window.hide()
         window.showFullScreen()
     except:
         window.showFullScreen()
 
 def to_1_coins_clicked():
-    global coin_count, lcd_coin_counter, bills_window, coins_window, window
+    global coin_count, lcd_coin_counter, bills_window, coins_window, window, loader_window
     dispense(coin_count, [1])
     coin_count = 0
     lcd_coin_counter.display(coin_count)
     try:
         bills_window.hide()
         coins_window.hide()
+        loader_window.hide()
         window.showFullScreen()
     except:
         window.showFullScreen()
@@ -228,7 +234,13 @@ def dispense(coins, denominations):
     global window, coins_window, bills_window, loader_window
     if coins == 0:
         return coins
-    loader_window.showFullScreen()
+    try:
+        bills_window.hide()
+        coins_window.hide()
+        window.hide()
+        loader_window.showFullScreen()
+    except:
+        pass
     for denomination in denominations:
         print("Number of {} bills: {}".format(denomination, coins // denomination))
         count = coins // denomination
@@ -241,7 +253,11 @@ def dispense(coins, denominations):
         if rem <= 0:
             break
         time.sleep(2)
-    loader_window.hide()
+    try:
+        loader_window.hide()
+    except:
+        pass
+    
     return coins
 
 
