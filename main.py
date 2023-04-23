@@ -9,7 +9,7 @@ os.environ["DISPLAY"] = ":0"
 GPIO.setmode(GPIO.BCM)
 
 # Define pins
-coin_pin = 2
+coin_pin = 3
 bill_acceptor_pin = 9
 bill_inhibitor_pin = 10
 relay_1_pin = 17
@@ -65,7 +65,6 @@ app = QtWidgets.QApplication([])
 window = uic.loadUi("main.ui")
 bills_window = uic.loadUi("to_bills.ui")
 coins_window = uic.loadUi("to_coins.ui")
-loader_window = uic.loadUi("loader.ui")
 
 
 
@@ -120,80 +119,89 @@ GPIO.add_event_detect(bill_acceptor_pin, GPIO.FALLING, callback=credit_callback)
 GPIO.add_event_detect(bill_inhibitor_pin, GPIO.FALLING, callback=inhibitor_callback)
 
 
+def to_100_bills_clicked():
+    global coin_count
+    global lcd_coin_counter, bills_window, coins_window, window
+    bills_to_dispense = [100, 50, 20]
+    remaining_coins = dispense(coin_count, bills_to_dispense)
+    coin_count = remaining_coins
+    lcd_coin_counter.display(coin_count)
+    if remaining_coins > 0:
+        remaining_coins_to_dispense = [5, 1] if remaining_coins < 5 else [1]
+        dispense(remaining_coins, remaining_coins_to_dispense)
+        coin_count = 0
+        lcd_coin_counter.display(coin_count)
+    try:
+        bills_window.hide()
+        coins_window.hide()
+
+        # loader_window.hide()
+        window.showFullScreen()
+    except:
+        window.showFullScreen()
+def to_50_bills_clicked():
+    global coin_count
+    global lcd_coin_counter, bills_window, coins_window, window #, loader_window
+    bills_to_dispense = [50, 20]
+    remaining_coins = dispense(coin_count, bills_to_dispense)
+    coin_count = remaining_coins
+    lcd_coin_counter.display(coin_count)
+    if remaining_coins > 0:
+        remaining_coins_to_dispense = [5, 1] if remaining_coins < 5 else [1]
+        dispense(remaining_coins, remaining_coins_to_dispense)
+        coin_count = 0
+        lcd_coin_counter.display(coin_count)
+    try:
+        bills_window.hide()
+        coins_window.hide()
+
+        # loader_window.hide()
+        window.showFullScreen()
+    except:
+        window.showFullScreen()
+def to_20_bills_clicked():
+    global coin_count
+    global lcd_coin_counter, bills_window, coins_window, window #, loader_window
+    bills_to_dispense = [20]
+    remaining_coins = dispense(coin_count, bills_to_dispense)
+    coin_count = remaining_coins
+    lcd_coin_counter.display(coin_count)
+    if remaining_coins > 0:
+        remaining_coins_to_dispense = [5, 1] if remaining_coins < 5 else [1]
+        dispense(remaining_coins, remaining_coins_to_dispense)
+        coin_count = 0
+        lcd_coin_counter.display(coin_count)
+    try:
+        bills_window.hide()
+        coins_window.hide()
+
+        # loader_window.hide()
+        window.showFullScreen()
+    except:
+        window.showFullScreen()
+        
+def to_bills_cancel_clicked():
+    global bills_window, window
+    bills_window.hide()
+    window.showFullScreen()
+
 # Define button click handlers
 def to_bills_clicked():
     global window, bills_window
      # check if coin count is greater than 0
     if coin_count == 0:
         return
-    def to_100_bills_clicked():
-        global coin_count
-        global lcd_coin_counter, bills_window, coins_window, window, loader_window
-        bills_to_dispense = [100, 50, 20]
-        remaining_coins = dispense(coin_count, bills_to_dispense)
-        coin_count = remaining_coins
-        lcd_coin_counter.display(coin_count)
-        if remaining_coins > 0:
-            remaining_coins_to_dispense = [5, 1] if remaining_coins < 5 else [1]
-            dispense(remaining_coins, remaining_coins_to_dispense)
-            coin_count = 0
-            lcd_coin_counter.display(coin_count)
-        try:
-            bills_window.hide()
-            coins_window.hide()
-
-            loader_window.hide()
-            window.showFullScreen()
-        except:
-            window.showFullScreen()
-    def to_50_bills_clicked():
-        global coin_count
-        global lcd_coin_counter, bills_window, coins_window, window, loader_window
-        bills_to_dispense = [50, 20]
-        remaining_coins = dispense(coin_count, bills_to_dispense)
-        coin_count = remaining_coins
-        lcd_coin_counter.display(coin_count)
-        if remaining_coins > 0:
-            remaining_coins_to_dispense = [5, 1] if remaining_coins < 5 else [1]
-            dispense(remaining_coins, remaining_coins_to_dispense)
-            coin_count = 0
-            lcd_coin_counter.display(coin_count)
-        try:
-            bills_window.hide()
-            coins_window.hide()
-
-            loader_window.hide()
-            window.showFullScreen()
-        except:
-            window.showFullScreen()
-    def to_20_bills_clicked():
-        global coin_count
-        global lcd_coin_counter, bills_window, coins_window, window, loader_window
-        bills_to_dispense = [20]
-        remaining_coins = dispense(coin_count, bills_to_dispense)
-        coin_count = remaining_coins
-        lcd_coin_counter.display(coin_count)
-        if remaining_coins > 0:
-            remaining_coins_to_dispense = [5, 1] if remaining_coins < 5 else [1]
-            dispense(remaining_coins, remaining_coins_to_dispense)
-            coin_count = 0
-            lcd_coin_counter.display(coin_count)
-        try:
-            bills_window.hide()
-            coins_window.hide()
-
-            loader_window.hide()
-            window.showFullScreen()
-        except:
-            window.showFullScreen()
+    
     bills_window.to_100_bills.clicked.connect(to_100_bills_clicked)
     bills_window.to_50_bills.clicked.connect(to_50_bills_clicked)
     bills_window.to_20_bills.clicked.connect(to_20_bills_clicked)
+    # to_bills_cancel
+    bills_window.to_bills_cancel.clicked.connect(to_bills_cancel_clicked)
     window.hide()
     bills_window.showFullScreen()
 
 def to_5_coins_clicked():
-    global coin_count, lcd_coin_counter, bills_window, coins_window, window, loader_window
+    global coin_count, lcd_coin_counter, bills_window, coins_window, window #, loader_window
     remaining_coins = dispense(coin_count, [5, 1])
     coin_count = 0
     lcd_coin_counter.display(coin_count)
@@ -203,23 +211,28 @@ def to_5_coins_clicked():
         bills_window.hide()
         coins_window.hide()
 
-        loader_window.hide()
+        # loader_window.hide()
         window.showFullScreen()
     except:
         window.showFullScreen()
 
 def to_1_coins_clicked():
-    global coin_count, lcd_coin_counter, bills_window, coins_window, window, loader_window
+    global coin_count, lcd_coin_counter, bills_window, coins_window, window #, loader_window
     dispense(coin_count, [1])
     coin_count = 0
     lcd_coin_counter.display(coin_count)
     try:
         bills_window.hide()
         coins_window.hide()
-        loader_window.hide()
+        # loader_window.hide()
         window.showFullScreen()
     except:
         window.showFullScreen()
+
+def to_coins_cancel_clicked():
+    global window, coins_window
+    window.showFullScreen()
+    coins_window.hide()
 
 def to_coins_clicked():
     global coin_count
@@ -227,17 +240,19 @@ def to_coins_clicked():
         return
     coins_window.to_5_coins.clicked.connect(to_5_coins_clicked)
     coins_window.to_1_coins.clicked.connect(to_1_coins_clicked)
+    # to_coins_cancel button clicked
+    coins_window.to_coins_cancel.clicked.connect(to_coins_cancel_clicked)
     window.hide()
     coins_window.showFullScreen()
 
 def dispense(coins, denominations):
-    global window, coins_window, bills_window, loader_window
+    global window, coins_window, bills_window
     if coins == 0:
         return coins
-    try:
-        loader_window.show()
-    except:
-        pass
+    # try:
+    #     loader_window.show()
+    # except:
+    #     pass
     for denomination in denominations:
         print("Number of {} bills: {}".format(denomination, coins // denomination))
         count = coins // denomination
@@ -250,10 +265,10 @@ def dispense(coins, denominations):
         if rem <= 0:
             break
         time.sleep(2)
-    try:
-        loader_window.hide()
-    except:
-        pass
+    # try:
+    #     loader_window.hide()
+    # except:
+    #     pass
 
     return coins
 
