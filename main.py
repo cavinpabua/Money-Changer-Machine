@@ -120,12 +120,8 @@ GPIO.add_event_detect(bill_inhibitor_pin, GPIO.FALLING, callback=inhibitor_callb
 
 
 def to_100_bills_clicked():
-    global coin_count, lcd_coin_counter, bills_window, coins_window, window
-    # disable to_100_bills, to_50_bills, to_20_bills buttons while dispensing
-    bills_window.to_100_bills.setEnabled(False)
-    bills_window.to_50_bills.setEnabled(False)
-    bills_window.to_20_bills.setEnabled(False)
-
+    global coin_count
+    global lcd_coin_counter, bills_window, coins_window, window
     bills_to_dispense = [100, 50, 20]
     remaining_coins = dispense(coin_count, bills_to_dispense)
     coin_count = remaining_coins
@@ -136,11 +132,6 @@ def to_100_bills_clicked():
         coin_count = 0
         lcd_coin_counter.display(coin_count)
     try:
-        # re-enable to_100_bills, to_50_bills, to_20_bills buttons after dispensing
-        bills_window.to_100_bills.setEnabled(True)
-        bills_window.to_50_bills.setEnabled(True)
-        bills_window.to_20_bills.setEnabled(True)
-
         bills_window.hide()
         coins_window.hide()
 
@@ -151,9 +142,6 @@ def to_100_bills_clicked():
 def to_50_bills_clicked():
     global coin_count
     global lcd_coin_counter, bills_window, coins_window, window #, loader_window
-    bills_window.to_100_bills.setEnabled(False)
-    bills_window.to_50_bills.setEnabled(False)
-    bills_window.to_20_bills.setEnabled(False)
     bills_to_dispense = [50, 20]
     remaining_coins = dispense(coin_count, bills_to_dispense)
     coin_count = remaining_coins
@@ -164,10 +152,6 @@ def to_50_bills_clicked():
         coin_count = 0
         lcd_coin_counter.display(coin_count)
     try:
-        bills_window.to_100_bills.setEnabled(True)
-        bills_window.to_50_bills.setEnabled(True)
-        bills_window.to_20_bills.setEnabled(True)
-
         bills_window.hide()
         coins_window.hide()
 
@@ -178,9 +162,6 @@ def to_50_bills_clicked():
 def to_20_bills_clicked():
     global coin_count
     global lcd_coin_counter, bills_window, coins_window, window #, loader_window
-    bills_window.to_100_bills.setEnabled(False)
-    bills_window.to_50_bills.setEnabled(False)
-    bills_window.to_20_bills.setEnabled(False)
     bills_to_dispense = [20]
     remaining_coins = dispense(coin_count, bills_to_dispense)
     coin_count = remaining_coins
@@ -191,10 +172,6 @@ def to_20_bills_clicked():
         coin_count = 0
         lcd_coin_counter.display(coin_count)
     try:
-        bills_window.to_100_bills.setEnabled(True)
-        bills_window.to_50_bills.setEnabled(True)
-        bills_window.to_20_bills.setEnabled(True)
-        
         bills_window.hide()
         coins_window.hide()
 
@@ -202,7 +179,7 @@ def to_20_bills_clicked():
         window.showFullScreen()
     except:
         window.showFullScreen()
-
+        
 def to_bills_cancel_clicked():
     global bills_window, window
     bills_window.hide()
@@ -225,20 +202,12 @@ def to_bills_clicked():
 
 def to_5_coins_clicked():
     global coin_count, lcd_coin_counter, bills_window, coins_window, window #, loader_window
-    # disable to_5_coins and to_1_coins button while dispensing
-    coins_window.to_5_coins.setEnabled(False)
-    coins_window.to_1_coins.setEnabled(False)
     remaining_coins = dispense(coin_count, [5, 1])
     coin_count = 0
     lcd_coin_counter.display(coin_count)
     if remaining_coins > 0:
         dispense(remaining_coins, [1])
-
     try:
-        # re-enable to_5_coins and to_1_coins button after dispensing
-        coins_window.to_5_coins.setEnabled(True)
-        coins_window.to_1_coins.setEnabled(True)
-
         bills_window.hide()
         coins_window.hide()
 
@@ -249,14 +218,10 @@ def to_5_coins_clicked():
 
 def to_1_coins_clicked():
     global coin_count, lcd_coin_counter, bills_window, coins_window, window #, loader_window
-    coins_window.to_5_coins.setEnabled(False)
-    coins_window.to_1_coins.setEnabled(False)
     dispense(coin_count, [1])
     coin_count = 0
     lcd_coin_counter.display(coin_count)
     try:
-        coins_window.to_5_coins.setEnabled(True)
-        coins_window.to_1_coins.setEnabled(True)
         bills_window.hide()
         coins_window.hide()
         # loader_window.hide()
