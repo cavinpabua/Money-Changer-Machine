@@ -235,10 +235,7 @@ def dispense(coins, denominations):
     if coins == 0:
         return coins
     try:
-        bills_window.hide()
-        coins_window.hide()
-        window.hide()
-        loader_window.showFullScreen()
+        loader_window.show()
     except:
         pass
     for denomination in denominations:
