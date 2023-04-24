@@ -40,6 +40,12 @@ try:
     GPIO.setup(ir_sensor_4_pin, GPIO.IN)
     GPIO.setup(ir_sensor_5_pin, GPIO.IN)
 
+    GPIO.setup(ir_sensor_1_pin, GPIO.LOW)
+    GPIO.setup(ir_sensor_2_pin, GPIO.LOW)
+    GPIO.setup(ir_sensor_3_pin, GPIO.LOW)
+    GPIO.setup(ir_sensor_4_pin, GPIO.LOW)
+    GPIO.setup(ir_sensor_5_pin, GPIO.LOW)
+
     GPIO.output(relay_1_pin, GPIO.LOW)
     GPIO.output(relay_2_pin, GPIO.LOW)
     GPIO.output(relay_3_pin, GPIO.LOW)
